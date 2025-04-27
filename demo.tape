@@ -9,18 +9,39 @@ Enter
 Wait+Screen@15s  /booboo/
 Sleep 1s
 Set TypingSpeed 500ms
+Down
+Space
+Down
+Down
+Space
+Up
+Space
+Down
 Space
 Down
 Down
 Space
 Down
+Up
+Up
+Up
+Up
+Up
+Up
+Space
+Down
+Up
+Down
 Space
 Up
 Up
 Space
-Up
+Down
 Space
-Up
+Down
+Down
+Down
+Down
 Space
 Sleep 3s
 Enter

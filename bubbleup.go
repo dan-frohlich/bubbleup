@@ -181,7 +181,7 @@ func (b BubbleUp[T]) View() string {
 	sb.WriteString(b.theme.Help.FullDesc.Render("↑ up • ↓ down • [space] (de)select • [enter] submit"))
 	sb.WriteRune('\n')
 
-	return sb.String()
+	return b.theme.Focused.Card.Render(sb.String())
 }
 
 func valueAsString(v any) string {
