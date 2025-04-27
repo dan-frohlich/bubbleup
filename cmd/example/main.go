@@ -18,8 +18,8 @@ func main() {
 	bu := bubbleup.New[string]().
 		WithTitle("Reorder the list").
 		WithItems(items...).
-		WithTheme(huh.ThemeBase16()).
-		WithHelp(true)
+		WithHelp(true).
+		Theme(huh.ThemeBase16())
 
 	e := ExampleApp{subModel: bu}
 

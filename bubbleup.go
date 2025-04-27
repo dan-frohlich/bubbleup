@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"strings"
 
+	"github.com/charmbracelet/bubbles/key"
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/huh"
 	"github.com/charmbracelet/lipgloss"
@@ -11,10 +12,12 @@ import (
 
 var (
 	_ tea.Model = BubbleUp[string]{}
-	_ tea.Model = BubbleUp[int]{}
+	_ huh.Field = BubbleUp[string]{}
 )
 
 type BubbleUp[T any] struct {
+	huh.Field
+	key        string
 	title      string
 	items      []BubbleUpItem[T]
 	curentItem int
@@ -92,7 +95,7 @@ func (b BubbleUp[T]) WithTitle(title string) BubbleUp[T] {
 	return b
 }
 
-func (b BubbleUp[T]) WithTheme(theme *huh.Theme) BubbleUp[T] {
+func (b BubbleUp[T]) Theme(theme *huh.Theme) BubbleUp[T] {
 	b.theme = theme
 	return b
 }
@@ -195,4 +198,101 @@ func valueAsString(v any) string {
 	default:
 		return fmt.Sprintf("%v", vv)
 	}
+}
+
+// Bubble Tea Events
+// For huh.Field interface
+func (b BubbleUp[T]) Blur() tea.Cmd {
+	return nil
+}
+
+// For huh.Field interface
+func (b BubbleUp[T]) Focus() tea.Cmd {
+	return nil
+}
+
+// Errors and Validation
+// For huh.Field interface
+func (b BubbleUp[T]) Error() error {
+	return nil
+}
+
+// Run runs the field individually.
+// For huh.Field interface
+func (b BubbleUp[T]) Run() error {
+	return nil
+}
+
+// Skip returns whether this input should be skipped or not.
+// For huh.Field interface
+func (b BubbleUp[T]) Skip() bool {
+	return false
+}
+
+// Zoom returns whether this input should be zoomed or not.
+// Zoom allows the field to take focus of the group / form height.
+// For huh.Field interface
+func (b BubbleUp[T]) Zoom() bool {
+	return false
+}
+
+// KeyBinds returns help keybindings.
+// For huh.Field interface
+func (b BubbleUp[T]) KeyBinds() []key.Binding {
+	return nil
+}
+
+// WithTheme sets the theme on a field.
+// For huh.Field interface
+func (b BubbleUp[T]) WithTheme(theme *huh.Theme) huh.Field {
+	b.theme = theme
+	return b
+}
+
+// WithAccessible sets whether the field should run in accessible mode.
+// For huh.Field interface
+func (b BubbleUp[T]) WithAccessible(bool) huh.Field {
+	return b
+}
+
+// WithKeyMap sets the keymap on a field.
+// For huh.Field interface
+func (b BubbleUp[T]) WithKeyMap(*huh.KeyMap) huh.Field {
+	return b
+}
+
+// WithWidth sets the width of a field.
+// For huh.Field interface
+func (b BubbleUp[T]) WithWidth(int) huh.Field {
+	return b
+}
+
+// WithHeight sets the height of a field.
+// For huh.Field interface
+func (b BubbleUp[T]) WithHeight(int) huh.Field {
+	return b
+}
+
+// WithPosition tells the field the index of the group and position it is in.
+// For huh.Field interface
+func (b BubbleUp[T]) WithPosition(huh.FieldPosition) huh.Field {
+	return b
+}
+
+// Key sets the key of the field which can be used to retrieve the value after submission.
+func (s *BubbleUp[T]) Key(key string) *BubbleUp[T] {
+	s.key = key
+	return s
+}
+
+// GetKey returns the field's key.
+// For huh.Field interface
+func (b BubbleUp[T]) GetKey() string {
+	return b.key
+}
+
+// GetValue returns the field's value.
+// For huh.Field interface
+func (b BubbleUp[T]) GetValue() any {
+	return b.Values()
 }
